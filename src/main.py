@@ -3,14 +3,13 @@ import asyncio
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers.user import router as user_router
-import uvicorn
 
 from db.database import create_tables
 
 app = FastAPI()
 main_router = APIRouter(prefix="/api/v1")
 
-origins = ["127.0.0.1:8000"]
+origins = ["http://localhost:8000"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -27,12 +26,5 @@ app.add_middleware(
 )
 
 
-def main():
-    asyncio.run(create_tables())
-    main_router.include_router(user_router)
-    app.include_router(main_router)
-    uvicorn.run(app=app, host="127.0.0.1", port=8000)
-
-
-if __name__ == "__main__":
-    main()
+main_router.include_router(user_router)
+app.include_router(main_router)
