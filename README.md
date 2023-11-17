@@ -1,4 +1,4 @@
-# digital_challege
+# digital_challenge
 
 # Запуск
 
