@@ -1,0 +1,6 @@
+aiosqlite
+bcrypt
+fastapi
+python-dotenv
+SQLAlchemy
+uvicorn
