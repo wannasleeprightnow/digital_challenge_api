@@ -11,7 +11,8 @@ app = FastAPI()
 main_router = APIRouter(prefix="/api/v1")
 
 origins = ["http://localhost:8080",
-           "ws://localhost:8080"]
+           "ws://localhost:8080",
+           "https://digital-challenge-api.onrender.com/"]
 
 app.add_middleware(
     CORSMiddleware,
