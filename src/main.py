@@ -1,3 +1,5 @@
+import asyncio
+
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers.user import router as user_router
@@ -24,7 +26,3 @@ app.add_middleware(
     ],
 )
 
-
-main_router.include_router(user_router)
-main_router.include_router(admin_router)
-app.include_router(main_router)

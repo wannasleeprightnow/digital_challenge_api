@@ -1,7 +1,7 @@
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 
-PATH_TO_DB = "db.sqlite"
+PATH_TO_DB = "database.sqlite"
 
 
 class Base(DeclarativeBase):
