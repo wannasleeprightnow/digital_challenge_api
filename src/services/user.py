@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 
 from models.user import UserModel
-from schemas.user import User, UserLogin, UserRegister
+from schemas.user import User, UserLogin
 from repositories.user import UserRepository
 
 
@@ -10,7 +10,7 @@ class UserService:
         self.user_repo: UserRepository = user_repo()
 
     async def register(
-        self, user: UserRegister
+        self, user: User
     ) -> dict:
         if await self.user_repo.select_one_user(user.username):
             raise HTTPException(

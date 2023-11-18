@@ -10,18 +10,23 @@ PHONE_NUMBER_CHECK = re.compile(
 PASSWORD_CHECK = re.compile(r"^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*\d).{8,}$")
 
 
-class UserRegister(BaseModel):
+class User(BaseModel):
     username: str
     name: str
+    surname: str
+    name_by_father: str
+    job_title: str
+    on_work: bool
     phone_number: str
     password: str
+    
 
     @validator("username")
     def validate_username(cls, value):
         if not USERNAME_CHECK.match(value):
             raise HTTPException(
                 status_code=422,
-                detail="Userame should contains only letters and\
+                detail="Username should contains only letters and\
                     be no longer than 50 characters."
             )
         return value
@@ -32,6 +37,26 @@ class UserRegister(BaseModel):
             raise HTTPException(
                 status_code=422,
                 detail="Name should contains only russian letters and \
+be no longer than 25 characters."
+            )
+        return value
+    
+    @validator("surname")
+    def validate_surname(cls, value):
+        if not NAME_CHECK.match(value):
+            raise HTTPException(
+                status_code=422,
+                detail="Surname should contains only russian letters and \
+be no longer than 25 characters."
+            )
+        return value
+    
+    @validator("name_by_father")
+    def validate_name_by_father(cls, value):
+        if not NAME_CHECK.match(value):
+            raise HTTPException(
+                status_code=422,
+                detail="Name by father should contains only russian letters and \
 be no longer than 25 characters."
             )
         return value
@@ -59,13 +84,3 @@ digits and special symbol and be longer than 8 characters."
 class UserLogin(BaseModel):
     username: str
     password: str
-
-
-class User(BaseModel):
-    id: int
-    username: str
-    password: str
-    name: str
-    phone_number: str
-    user_type: str
-    user_image: str
