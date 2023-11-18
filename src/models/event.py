@@ -13,7 +13,7 @@ class EventModel(Base):
     category: Mapped[str] = mapped_column(String(100))
     place: Mapped[str] = mapped_column(String(50))
     time: Mapped[datetime.datetime]
-    post: Mapped[str] = mapped_column(String(50))
+    post: Mapped[str]
     is_done: Mapped[bool]
     user_id: Mapped[int] = mapped_column(ForeignKey('user.id'))
 
