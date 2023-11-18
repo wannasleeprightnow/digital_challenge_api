@@ -10,22 +10,14 @@ from db.database import create_tables
 app = FastAPI()
 main_router = APIRouter(prefix="/api/v1")
 
-origins = ["http://localhost:8080",
-           "ws://localhost:8080",
-           "https://digital-challenge-api.onrender.com/"]
+origins = ["http://0.0.0.0:8080"]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allow_headers=[
-        "Content-Type",
-        "Set-Cookie",
-        "Access-Control-Allow-Headers",
-        "Access-Control-Allow-Origin",
-        "Authorization",
-    ],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 main_router.include_router(user_router)
