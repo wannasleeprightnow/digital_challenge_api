@@ -61,7 +61,7 @@ html = """
         <ul id='messages'>
         </ul>
         <script>
-            var ws = new WebSocket("ws://localhost:8080/api/v1/user/ws");
+            var ws = new WebSocket("ws://0.0.0.0:8080/api/v1/user/ws");
             ws.onmessage = function(event) {
                 var messages = document.getElementById('messages')
                 var message = document.createElement('li')
@@ -87,11 +87,13 @@ async def get():
 
 
 @router.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
+async def websocket_endpoint(websocket: WebSocket,):
     await manager.connect(websocket)
     try:
         while True:
             data = await websocket.receive_text()
+            await manager.send_personal_message(f"You wrote: {data}", websocket)
             await manager.broadcast(f"says: {data}")
     except WebSocketDisconnect:
         manager.disconnect(websocket)
+        await manager.broadcast("leave")
