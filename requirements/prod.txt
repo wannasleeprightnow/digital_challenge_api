@@ -6,3 +6,4 @@ SQLAlchemy
 uvicorn
 gunicorn
 pydantic[email]
+websockets
