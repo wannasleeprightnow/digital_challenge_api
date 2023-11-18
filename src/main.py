@@ -1,5 +1,3 @@
-import asyncio
-
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from routers.user import router as user_router
