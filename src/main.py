@@ -10,7 +10,7 @@ from db.database import create_tables
 app = FastAPI()
 main_router = APIRouter(prefix="/api/v1")
 
-origins = ["http://0.0.0.0:8080"]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
