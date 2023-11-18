@@ -4,13 +4,14 @@ from fastapi import HTTPException
 from pydantic import BaseModel, validator
 
 USERNAME_CHECK = re.compile(r"^[a-zA-Zа-яА-Я-]{1,50}$")
-NAME_CHECK = re.compile(r"^[a-zA-Zа-яА-Я-]{1,25}$")
+NAME_CHECK = re.compile(r"^[а-яА-Я-]{1,25}$")
 PHONE_NUMBER_CHECK = re.compile(
-    r"^\+?\d{1,4}\s?\-?\(?\d{1,3}\)?[\s.-]?\d{1,4}\s?\-?\d{1,4}\s?\-?\d{1,9}$")
+    r"^\+?\d{1,4}\s?\-?\(?\d{1,3}\)?[\s.-]?\d{1,4}\s?\-?\d{1,4}\s?\-?\d{1,9}$"
+)
 PASSWORD_CHECK = re.compile(r"^(?=.*[a-zа-я])(?=.*[A-ZА-Я])(?=.*\d).{8,}$")
 
 
-class User(BaseModel):
+class UserRegister(BaseModel):
     username: str
     name: str
     surname: str
@@ -19,7 +20,6 @@ class User(BaseModel):
     on_work: bool
     phone_number: str
     password: str
-    
 
     @validator("username")
     def validate_username(cls, value):
@@ -27,7 +27,7 @@ class User(BaseModel):
             raise HTTPException(
                 status_code=422,
                 detail="Username should contains only letters and\
-                    be no longer than 50 characters."
+                    be no longer than 50 characters.",
             )
         return value
 
@@ -37,27 +37,27 @@ class User(BaseModel):
             raise HTTPException(
                 status_code=422,
                 detail="Name should contains only russian letters and \
-be no longer than 25 characters."
+be no longer than 25 characters.",
             )
         return value
-    
+
     @validator("surname")
     def validate_surname(cls, value):
         if not NAME_CHECK.match(value):
             raise HTTPException(
                 status_code=422,
                 detail="Surname should contains only russian letters and \
-be no longer than 25 characters."
+be no longer than 25 characters.",
             )
         return value
-    
+
     @validator("name_by_father")
     def validate_name_by_father(cls, value):
         if not NAME_CHECK.match(value):
             raise HTTPException(
                 status_code=422,
                 detail="Name by father should contains only russian letters and \
-be no longer than 25 characters."
+be no longer than 25 characters.",
             )
         return value
 
@@ -66,7 +66,7 @@ be no longer than 25 characters."
         if not PHONE_NUMBER_CHECK.match(value):
             raise HTTPException(
                 status_code=422,
-                detail="Phone number should not contains letters."
+                detail="Phone number should not contains letters.",
             )
         return value
 
@@ -76,11 +76,23 @@ be no longer than 25 characters."
             raise HTTPException(
                 status_code=422,
                 detail="Password must contains letters of both cases and\
-digits and special symbol and be longer than 8 characters."
+digits and special symbol and be longer than 8 characters.",
             )
         return value
 
 
 class UserLogin(BaseModel):
     username: str
+    password: str
+
+
+class User(BaseModel):
+    id: int
+    username: str
+    name: str
+    surname: str
+    name_by_father: str
+    job_title: str
+    on_work: bool
+    phone_number: str
     password: str

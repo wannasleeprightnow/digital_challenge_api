@@ -1,11 +1,11 @@
-from pydantic import BaseModel, validator, EmailStr
+from pydantic import BaseModel
 
 
 class Admin(BaseModel):
     id: int
     username: str
     password: str
-    mail: EmailStr
+    mail: str
 
 
 class AdminLogin(BaseModel):

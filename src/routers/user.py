@@ -3,17 +3,17 @@ from fastapi.responses import HTMLResponse
 
 from dependencies import user_service
 from services.user import UserService
-from schemas.user import User, UserLogin
+from schemas.user import  UserLogin
 
 router = APIRouter(prefix="/user", tags=["user"])
 
 
-@router.post("/register")
-async def register(
-    user: User = Body(),
-    user_service: UserService = Depends(user_service)
-):
-    return await user_service.register(user)
+# @router.post("/register")
+# async def register(
+#     user: UserRegister = Body(),
+#     user_service: UserService = Depends(user_service)
+# ):
+#     return await user_service.register(user)
 
 
 @router.post("/login")

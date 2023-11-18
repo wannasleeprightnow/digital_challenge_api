@@ -12,7 +12,7 @@ class AdminService:
     async def login(
         self, admin: AdminLogin
     ) -> Admin:
-        admin_from_db = await self.user_repo.select_one_admin(admin.username)
+        admin_from_db = await self.admin_repo.select_one_admin(admin.username)
         if not admin_from_db:
             raise HTTPException(
                 status_code=400,

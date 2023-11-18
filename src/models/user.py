@@ -13,11 +13,10 @@ class UserModel(Base):
     password: Mapped[str] = mapped_column(String(25))
     name: Mapped[str] = mapped_column(String(25))
     surname: Mapped[str] = mapped_column(String(25))
-    name_by_father : Mapped[str] = mapped_column(String(25))
-    on_work: Mapped[bool]
+    name_by_father: Mapped[str] = mapped_column(String(25))
+    on_work: Mapped[bool] = mapped_column(default=False)
     job_title: Mapped[str]
     phone_number: Mapped[str] = mapped_column(unique=True)
-
 
     @staticmethod
     def hash_password(unhashed_password: str):
@@ -33,4 +32,5 @@ class UserModel(Base):
 
     def __repr__(self):
         return f"{self.id} {self.username} {self.password} \
-            {self.name} {self.phone_number} {self.user_type=}"
+            {self.name} {self.surname} {self.name_by_father} \
+                {self.on_work} {self.job_title} {self.phone_number}"
