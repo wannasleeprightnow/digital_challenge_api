@@ -26,3 +26,6 @@ app.add_middleware(
     ],
 )
 
+main_router.include_router(user_router)
+main_router.include_router(admin_router)
+app.include_router(main_router)
