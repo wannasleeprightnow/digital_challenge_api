@@ -61,7 +61,7 @@ html = """
         <ul id='messages'>
         </ul>
         <script>
-            var ws = new WebSocket("ws://kjwjmhhghjg-k.onrender.com/api/v1/user/ws");
+            var ws = new WebSocket("ws://localhost:8080/api/v1/user/ws");
             ws.onmessage = function(event) {
                 var messages = document.getElementById('messages')
                 var message = document.createElement('li')
